@@ -1,10 +1,9 @@
 import React from 'react'
-
+import './clock.css'
 const Clock = ({ timer }) => {
-  // console.log(timer)
   return (
-    <div>
-      <h3>{timer.toLocaleTimeString()} </h3>
+    <div className='clock'>
+      <h2>{timer.toLocaleTimeString()} </h2>
     </div>
   )
 }

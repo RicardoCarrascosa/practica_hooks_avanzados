@@ -5,7 +5,6 @@ import { Timer } from './hooks/Timer'
 
 function App() {
   const { Time } = Timer()
-  // console.log(Time)
   return (
     <>
       <Clock timer={Time} />

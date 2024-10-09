@@ -1,33 +1,114 @@
 .calculator {
+  align-self: center;
+  justify-self: center;
   display: flex;
   flex-direction: column;
   gap: 5px;
   align-items: center;
-  background-color: gray;
+  width: 500px;
+  background-color: #586167;
   min-height: 300px;
+  border-radius: 15px;
 }
 
 input {
+  font-size: 30px;
   margin-top: 10px;
-  font-size: 20px;
-  padding: 5px;
+  padding: 15px 0px;
+  width: 90%;
   text-align: center;
+  /* Chrome, Safari, Edge, Opera */
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  /* Firefox */
+  /* &[type=number] {
+  -moz-appearance: textfield;
+} */
 }
 
 button {
-  font-size: 20px;
-  background-color: darkslategrey;
-  padding: 10px;
-  margin: 5px 10px;
+  font-size: 35px;
+  background-color: #272838;
+  color: #f4f4f3;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 10px;
+  &:hover {
+    background-color: #5d536b;
+  }
 }
 
+.equalButton {
+  background-color: #db5355;
+  width: 90%;
+  &:hover {
+    background-color: #461112;
+  }
+}
 h3,
 h2 {
+  margin-top: 5px;
   font-size: 20px;
+  color: #f4f4f3;
 }
 
 #result {
-  padding: 5px 30px;
+  text-align: center;
+  font-size: 30px;
+  width: 90%;
+  padding: 15px 0px;
   border: 2px, solid, black;
-  background-color: beige;
+  background-color: #44ccff;
+}
+#oldResults {
+  width: 80%;
+  border: 1px lightgray solid;
+  padding: 5px;
+  margin-bottom: 10px;
+  /* background-color: blanchedalmond; */
+}
+.resultLine {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.resultTime {
+  padding-left: 20px;
+  color: #aaadba;
+}
+.resultVal {
+  padding-right: 20px;
+  color: #f4f4f3;
+}
+
+@media (max-width: 510px) {
+  .calculator {
+    width: 300px;
+  }
+  button {
+    font-size: 15px;
+    margin: 5px;
+  }
+}
+
+@media (max-width: 310px) {
+  .calculator {
+    width: 200px;
+  }
+  button {
+    font-size: 10px;
+    padding: 10px;
+    margin: 2px;
+  }
+  h3 {
+    font-size: 15px;
+  }
+  #result {
+    font-size: 25px;
+    padding: 5px;
+  }
 }

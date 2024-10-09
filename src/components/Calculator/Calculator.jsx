@@ -11,8 +11,6 @@ const INIT_CALC_STATE = {
 
 // Funcion reductora del estado con todos los componentes
 const calculatorReducer = (state, action) => {
-  // console.log(state)
-  // console.log(action)
   switch (action.type) {
     case 'SET_OPERATION':
       return {
@@ -22,11 +20,19 @@ const calculatorReducer = (state, action) => {
       }
       break
     case 'CALCULATE':
+      const time = new Date()
       return {
         result: action.payload,
         number1: 0,
         operation: '',
-        historicResult: [...state.historicResult, action.payload]
+        historicResult: [
+          ...state.historicResult,
+          {
+            value: String(action.payload),
+            text: action.text,
+            time: time.toLocaleTimeString()
+          }
+        ]
       }
       break
     default:
@@ -52,29 +58,44 @@ export const Calculator = memo(() => {
       [operation]
     ),
       (input.current.value = '')
+    input.current.focus()
   })
 
   return (
     <div className='calculator'>
+      <h2>React calculator:</h2>
+      <h3>Input a number</h3>
       <input type='number' ref={input}></input>
-      <div>
+      <div className='operators'>
         <button onClick={() => setOperation('+')}>+</button>
         <button onClick={() => setOperation('-')}>-</button>
         <button onClick={() => setOperation('x')}>x</button>
         <button onClick={() => setOperation('/')}>/</button>
         <button onClick={() => setOperation('%')}>%</button>
-        <button onClick={() => calculate(dispatch, operation, number1, input)}>
-          =
-        </button>
       </div>
-      <h2>Resultado</h2>
+      <button
+        className='equalButton'
+        onClick={() => calculate(dispatch, operation, number1, input)}
+      >
+        =
+      </button>
+
       <p id='result'>{result}</p>
-      <h3 id='OrderedResults'>Restultados Ordenados Mayor a menor : </h3>
-      {historicResult
-        .toSorted((a, b) => a - b)
-        .map((res, index) => (
-          <p key={index}>{res}</p>
-        ))}
+      <h3 id='OrderedResults'>Previous Calculations: : </h3>
+      <div id='oldResults'>
+        {historicResult
+          .slice(0)
+          .reverse()
+          .map((result, key) => {
+            return (
+              <div className='resultLine' key={key}>
+                <p className='resultTime'>{result.time}</p>
+                <p className='resultText'>{result.text}</p>
+                <p className='resultVal'>{result.value}</p>
+              </div>
+            )
+          })}
+      </div>
     </div>
   )
 })
